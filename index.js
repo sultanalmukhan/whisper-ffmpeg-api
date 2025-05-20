@@ -8,6 +8,10 @@ const { exec } = require('child_process');
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
+if (!fs.existsSync('uploads')) {
+  fs.mkdirSync('uploads');
+}
+
 app.post('/process', upload.single('video'), async (req, res) => {
   const videoPath = req.file.path;
   const audioPath = `${videoPath}.mp3`;
