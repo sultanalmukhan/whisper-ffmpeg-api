@@ -15,7 +15,6 @@ app.post('/process', upload.single('video'), (req, res) => {
 
   // Пример наложения субтитров с использованием ffmpeg
   ffmpeg(videoPath)
-    .outputOptions('-vf', 'subtitles=subtitle.srt') // Убедись, что файл subtitle.srt существует
     .save(outputPath)
     .on('end', () => {
       res.download(outputPath, () => {
